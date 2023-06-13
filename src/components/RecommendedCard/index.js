@@ -2,6 +2,7 @@ import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { styled } from 'styled-components'
 
 import MenuCard from '../MenuCard'
+import { useRouter } from 'next/navigation'
 
 const StyledCard = styled(Card)({
   background: 'transparent',
@@ -11,6 +12,10 @@ const StyledCard = styled(Card)({
 })
 
 export default function RecommendedCard() {
+  const router = useRouter()
+  const handleAddItemClick = () => {
+    router.push('/order')
+  }
   return (
     <StyledCard>
       <CardHeader
@@ -34,7 +39,7 @@ export default function RecommendedCard() {
       />
       <CardContent>
         <Box display="flex" gap="10px" sx={{ overflowX: 'auto' }} pb={2}>
-          <MenuCard />
+          <MenuCard onClick={handleAddItemClick} />
         </Box>
       </CardContent>
     </StyledCard>
