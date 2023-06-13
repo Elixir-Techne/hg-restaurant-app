@@ -2,10 +2,15 @@ import { Box, Card, TabScrollButton, Typography } from '@mui/material'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import { styled } from 'styled-components'
 
+import { getCategories } from '@/utils/api'
+
 import breakFastPng from '../../assets/icons/breakfast.png'
+import menu from '../../utils/MenuItem.json'
 
 const TabGroup = styled((props) => (
   <Tabs
@@ -30,11 +35,23 @@ const TabGroup = styled((props) => (
   },
 })
 
-export default function CategoryFilter({ tabs, onTabSelect }) {
-  const [activeTab, setActiveTab] = useState(1)
+export default function CategoryFilter({ tabs, onTabSelect, value }) {
+  const activeItem = menu.menuItems.find((item) => item.path === value)
+  const [activeTab, setActiveTab] = useState(activeItem?.id)
+  const router = useRouter()
+
+  // API for GET Menu
+
+  // useEffect(() => {
+  //   getCategories(restaurant_id)
+  //     .then((res) => res)
+  //     .catch((err) => console.log(err))
+  // }, [])
 
   const handleChange = (event, newValue) => {
+    const activeItem = menu.menuItems.find((item) => item.id === newValue)
     setActiveTab(newValue)
+    router.push(`/${activeItem.path}`)
     // onTabSelect(newValue)
   }
   return (
@@ -43,6 +60,7 @@ export default function CategoryFilter({ tabs, onTabSelect }) {
         filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
         boxShadow: 'none',
         backgroundColor: '#F3F3F5',
+        mb: 4,
       }}
     >
       <TabGroup
@@ -51,57 +69,50 @@ export default function CategoryFilter({ tabs, onTabSelect }) {
         scrollButtons="auto"
         variant="scrollable"
       >
-        {tabs &&
-          tabs.map((item, index) => {
-            return (
-              <Tab
-                key={item.id}
-                value={item.id}
-                sx={{
-                  borderRight: '1px solid #70707050 ',
-                }}
-                label={
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    height="100%"
-                    maxWidth="30%"
+        {menu.menuItems.map((item, index) => {
+          return (
+            <Tab
+              key={item.id}
+              value={item.id}
+              label={
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  height="100%"
+                  maxWidth="30%"
+                >
+                  <Image src={breakFastPng} width="50px" height="50px" alt="" />
+                  <Typography
+                    sx={{
+                      color: '#067153',
+                      fontSize: '10px',
+                      fontWeight: 'bold',
+                      marginBottom: '5px',
+                    }}
                   >
-                    <Image
-                      src={breakFastPng}
-                      width="50px"
-                      height="50px"
-                      alt=""
-                    />
-                    <Typography
-                      sx={{
-                        color: '#067153',
-                        fontSize: '10px',
-                        fontWeight: 'bold',
-                        marginBottom: '5px',
-                      }}
-                    >
-                      {item.name}
-                    </Typography>
-                  </Box>
-                }
-              />
-            )
-          })}
+                    {item.name}
+                  </Typography>
+                </Box>
+              }
+            />
+          )
+        })}
       </TabGroup>
-      <Box display="flex" gap="20px" mx={4} my={2}>
-        <Typography
-          sx={{ color: '#707070', fontSize: '11px', fontWeight: 'bold' }}
-        >
-          Recommended
-        </Typography>
-        <Typography
-          sx={{ color: '#707070', fontSize: '11px', fontWeight: 'bold' }}
-        >
-          Reorder
-        </Typography>
-      </Box>
+      {value === 'for-you' && (
+        <Box display="flex" gap="20px" mx={4} my={2}>
+          <Typography
+            sx={{ color: '#707070', fontSize: '11px', fontWeight: 'bold' }}
+          >
+            Recommended
+          </Typography>
+          <Typography
+            sx={{ color: '#707070', fontSize: '11px', fontWeight: 'bold' }}
+          >
+            Reorder
+          </Typography>
+        </Box>
+      )}
     </Card>
   )
 }

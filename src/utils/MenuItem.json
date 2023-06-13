@@ -4,6 +4,7 @@
       "id": 1,
       "name": "For You",
       "hasSubMenu": true,
+      "path": "for-you",
       "SubMenuItems": [
         {
           "id": 1,
@@ -20,17 +21,20 @@
     {
       "id": 2,
       "name": "Promotion",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "promotion"
     },
     {
       "id": 3,
       "name": "New!",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "new"
     },
     {
       "id": 4,
       "name": "Dome Income",
       "hasSubMenu": true,
+      "path": "dome-income",
       "SubMenuItems": [
         {
           "id": 1,
@@ -47,27 +51,32 @@
     {
       "id": 5,
       "name": "All Day Breakfast",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "all-day-breakfast"
     },
     {
       "id": 6,
       "name": "Soup",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "soup"
     },
     {
       "id": 7,
       "name": "Salad",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "salad"
     },
     {
       "id": 8,
       "name": "Sandwiches",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "sandwiches"
     },
     {
       "id": 9,
       "name": "Hott kitchen",
       "hasSubMenu": true,
+      "path": "hot-kitchen",
       "SubMenuItems": [
         {
           "id": 1,
@@ -84,32 +93,38 @@
     {
       "id": 10,
       "name": "Super Snacks",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "super-snacks"
     },
     {
       "id": 11,
       "name": "Sides",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "sides"
     },
     {
       "id": 12,
       "name": "Cakes",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "cakes"
     },
     {
       "id": 13,
       "name": "Vegetarian",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "vegetarian"
     },
     {
       "id": 14,
       "name": "Smooth Fruit",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "smooth-fruit"
     },
     {
       "id": 15,
       "name": "Coffees",
       "hasSubMenu": true,
+      "path": "coffee",
       "SubMenuItems": [
         {
           "id": 1,
@@ -125,13 +140,15 @@
     },
     {
       "id": 16,
-      "name": "Tea & Chai",
-      "hasSubMenu": false
+      "name": "Tea& Chai",
+      "hasSubMenu": false,
+      "path": "tea-chai"
     },
     {
       "id": 17,
       "name": "Milk Shake",
-      "hasSubMenu": false
+      "hasSubMenu": false,
+      "path": "milk-shake"
     }
   ]
 }

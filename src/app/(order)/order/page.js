@@ -3,11 +3,14 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
+import { useRouter } from 'next/navigation'
 import { styled } from 'styled-components'
 
 import OrderList from '@/components/OrderLIst'
 import PaymentSummary from '@/components/PaymentSummary'
 import RecommendedOrderCard from '@/components/RecommendedOrderCard'
+import { useEffect } from 'react'
+import { getOrderByID, getOrders } from '@/utils/api'
 
 const StyledCard = styled(Card)({
   height: '82px',
@@ -18,10 +21,29 @@ const StyledCard = styled(Card)({
 })
 
 export default function Order() {
+  const router = useRouter()
+
+   //API for GET orders
+
+  // useEffect(() => {
+  //   getOrders(restaurant_id)
+  //     .then((res) => res)
+  //     .catch((err) => console.log(err))
+  // }, [])
+
+  // useEffect(() => {
+  //   getOrderByID(restaurant_id,order_id)
+  //     .then((res) => res)
+  //     .catch((err) => console.log(err))
+  // }, [])
+
   return (
     <Box display="flex" flexDirection="column" height="100vh">
       <StyledCard>
-        <ArrowBackIosNewIcon sx={{ position: 'absolute', top: 25, left: 5 }} />
+        <ArrowBackIosNewIcon
+          sx={{ position: 'absolute', top: 25, left: 5 }}
+          onClick={() => router.back()}
+        />
         <CardHeader
           title={<Typography variant="h4">ORDER CART</Typography>}
           sx={{ textAlign: 'center' }}

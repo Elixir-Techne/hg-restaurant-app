@@ -12,6 +12,7 @@ import {
   useMediaQuery,
 } from '@mui/material'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { styled } from 'styled-components'
 
 import DoorInSvg from '@/assets/icons/DoorInSvg'
@@ -30,6 +31,11 @@ const StyledCard = styled(Card)({
 
 export default function LoginForm() {
   const isMobile = useMediaQuery('(max-width:768px)')
+  const router = useRouter()
+
+  const handleLoginClick = () => {
+    router.push('/for-you')
+  }
 
   return (
     <>
@@ -77,14 +83,14 @@ export default function LoginForm() {
             <Image src={LoginPng} alt="" />
           </Box>
           <Box>
-            <SocialLogin />
+            <SocialLogin onClick={handleLoginClick} />
             <Box sx={{ marginTop: (theme) => theme.spacing(8) }}>
               <Divider variant="middle">
                 <Typography sx={{ color: '#9D9A9A' }} variant="h6">
                   OR SIGN IN WITH
                 </Typography>
               </Divider>
-              <LoginInput />
+              <LoginInput onClick={handleLoginClick} />
             </Box>
           </Box>
           <Box
@@ -145,7 +151,7 @@ export default function LoginForm() {
               overflow: 'visible',
             }}
           >
-            <Button>
+            <Button onClick={handleLoginClick}>
               <Typography sx={{ mr: '10px' }}>CONTINUE AS GUEST</Typography>
               <DoorInSvg selected />
             </Button>
