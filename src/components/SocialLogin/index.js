@@ -1,7 +1,8 @@
-import { Box } from '@mui/material'
-import { createButton } from 'react-social-login-buttons'
+import { Box } from '@mui/material';
+import { createButton } from 'react-social-login-buttons';
 
-export default function SocialLogin({ tabs, onTabSelect }) {
+
+export default function SocialLogin({ onClick }) {
   const fbConfig = {
     text: 'SIGN IN WITH FACEBOOK',
     icon: 'facebook',
@@ -51,8 +52,8 @@ export default function SocialLogin({ tabs, onTabSelect }) {
         marginTop: (theme) => theme.spacing(8),
       }}
     >
-      <MyFacebookLoginButton />
-      <MyGoogleLoginButton />
+      <MyFacebookLoginButton onClick={onClick} />
+      <MyGoogleLoginButton onClick={onClick} />
     </Box>
   )
 }

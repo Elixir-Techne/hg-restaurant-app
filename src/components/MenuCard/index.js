@@ -27,12 +27,44 @@ const StyleChip = styled(Chip)({
 })
 
 const data = [
-  { id: 1, name: 'Egg Hollandaise', price: ' MYR 22.64', trending: false },
-  { id: 2, name: 'Egg Hollandaise', price: ' MYR 22.64', trending: true },
-  { id: 3, name: 'Egg Hollandaise', price: ' MYR 22.64', trending: false },
+  {
+    id: 1,
+    name: 'Egg Hollandaise',
+    price: ' MYR 22.64',
+    trending: false,
+    customize: false,
+  },
+  {
+    id: 2,
+    name: 'Egg Hollandaise',
+    price: ' MYR 22.64',
+    trending: true,
+    customize: true,
+  },
+  {
+    id: 3,
+    name: 'Egg Hollandaise',
+    price: ' MYR 22.64',
+    trending: false,
+    customize: false,
+  },
+  {
+    id: 4,
+    name: 'Egg Hollandaise',
+    price: ' MYR 22.64',
+    trending: false,
+    customize: false,
+  },
+  {
+    id: 5,
+    name: 'Egg Hollandaise',
+    price: ' MYR 22.64',
+    trending: true,
+    customize: true,
+  },
 ]
 
-export default function MenuCard() {
+export default function MenuCard({ onClick }) {
   return data.map((item) => (
     <StyledCard key={item.id}>
       {item.trending && <StyleChip label="Trending #1" />}
@@ -59,6 +91,7 @@ export default function MenuCard() {
           {item.price}
         </Typography>
         <Button
+          onClick={() => onClick(item)}
           variant="contained"
           sx={{
             height: '22px',

@@ -1,12 +1,6 @@
-'use client'
+'use client';
 
-import {
-  Box,
-  Button,
-  Card,
-  CardHeader,
-  Typography,
-} from '@mui/material'
+import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
 import Image from 'next/image'
 import { styled } from 'styled-components'
 
@@ -16,8 +10,7 @@ const StyledCard = styled(Card)({
   background: '#ffffff',
   boxShadow: 'none',
   borderRadius: '12px',
-  height: '71px',
-  maxHeight: '71px',
+  minHeight: '71px',
   minWidth: '307px',
   display: 'flex',
 })
@@ -64,7 +57,9 @@ export default function RecommendedOrderCard() {
             <Image
               src={cakePng}
               alt=""
-              style={{ height: '71px !important', width: '87px !important' }}
+              width={87}
+              height={71}
+              // style={{ height: '71px !important', width: '87px !important' }}
             />
             <Box display="flex" flexDirection="column" mx={4} my={2}>
               <Box>

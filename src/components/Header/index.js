@@ -12,7 +12,7 @@ export default function Header() {
     setDrawerOpen(!drawerOpen)
   }
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box display="flex" justifyContent="space-between" alignItems="center" my={4}>
       <IconButton onClick={handleDrawerToggle}>
         <Image src={MobileMenuSvg} alt="" />
       </IconButton>

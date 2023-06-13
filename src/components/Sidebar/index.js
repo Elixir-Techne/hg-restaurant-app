@@ -1,32 +1,35 @@
-import ExpandLess from '@mui/icons-material/ExpandLess'
-import ExpandMore from '@mui/icons-material/ExpandMore'
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  Collapse,
-  Divider,
-  Drawer,
-  List,
-  ListItemButton,
-  ListItemText,
-  ListSubheader,
-  Typography,
-} from '@mui/material'
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import { Avatar, Box, Button, Card, Collapse, Divider, Drawer, List, ListItemButton, ListItemText, ListSubheader, Typography } from '@mui/material';
+import { useRouter } from 'next/navigation'
 import * as React from 'react'
+import { useEffect } from 'react'
 
 import DoorInSvg from '@/assets/icons/DoorInSvg'
+import { getCategories } from '@/utils/api'
 
 import menu from '../../utils/MenuItem.json'
 
 export default function Sidebar({ open, onClose }) {
   const [openSubmenu, setOpenSubmenu] = React.useState('')
+  const router = useRouter()
+
+  //API for GET Menu
+
+  // useEffect(() => {
+  //   getCategories(restaurant_id)
+  //     .then((res) => res)
+  //     .catch((err) => console.log(err))
+  // }, [])
 
   const handleClick = (item) => {
     if (item.hasSubMenu && item.id === openSubmenu) setOpenSubmenu('')
-    else if (item.hasSubMenu) setOpenSubmenu(item.id)
-    else return
+    else if (item.hasSubMenu) {
+      setOpenSubmenu(item.id)
+      router.push(`/${item.path}`)
+    } else {
+      router.push(`/${item.path}`)
+    }
   }
 
   return (
@@ -40,8 +43,8 @@ export default function Sidebar({ open, onClose }) {
           backgroundColor: '#F3F3F5',
         },
         '& .MuiModal-backdrop': {
-            backgroundColor: 'transparent',
-            backdropFilter:"blur(1px)"
+          backgroundColor: 'transparent',
+          backdropFilter: 'blur(1px)',
         },
       }}
       variant="temporary"
