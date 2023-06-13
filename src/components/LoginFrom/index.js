@@ -109,7 +109,7 @@ export default function LoginForm() {
                 fontWeight: 'bold',
               }}
             >
-              By clicking 'Let's Go', I agree to TabSquare
+              By clicking &apos;Let&apos;s Go&apos;, I agree to TabSquare
               <span style={{ color: '#067153' }}> Term of Use</span> and{' '}
               <span style={{ color: '#067153' }}>
                 TabSquare Privacy Policy. Product Images are for illustration

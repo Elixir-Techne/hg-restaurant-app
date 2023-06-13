@@ -58,7 +58,7 @@ const CountryCodeSelect = ({ code, handleChange }) => {
   )
 }
 
-export default function LoginInput({onClick}) {
+export default function LoginInput({ onClick }) {
   const [code, setCode] = React.useState('')
   const handleCountryCodechange = (event) => {
     setCode(event.target.value)
@@ -94,7 +94,7 @@ export default function LoginInput({onClick}) {
           sx={{ width: '100%', borderRadius: '6px', height: '40px' }}
           onClick={onClick}
         >
-          <Typography sx={{ mr: '10px' }}>LET'S GO</Typography>
+          <Typography sx={{ mr: '10px' }}>LET&apos;S GO</Typography>
           <DoorInSvg />
         </Button>
       </Box>
