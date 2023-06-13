@@ -1,19 +1,16 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputBase,
-  TextField,
-  Typography,
-} from '@mui/material'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
-import Image from 'next/image'
-import * as React from 'react'
-import { styled } from 'styled-components'
+import { Box, Button, FormControl, InputBase, TextField, Typography } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Image from 'next/image';
+import * as React from 'react';
+import { styled } from 'styled-components';
 
-import DoorInSvg from '@/assets/icons/DoorInSvg'
+
+
 import { theme } from '@/theme'
+
+import DoorInSvg from '../../../public/assets/icons/DoorInSvg'
+
 
 const StyledInput = styled(InputBase)({
   'label + &': {

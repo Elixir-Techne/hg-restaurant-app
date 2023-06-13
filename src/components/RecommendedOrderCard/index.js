@@ -1,10 +1,11 @@
 'use client';
 
-import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
-import Image from 'next/image'
+import { Box, Button, Card, CardHeader, Typography } from '@mui/material';
+import Image from 'next/image';
 import { styled } from 'styled-components'
 
-import cakePng from '../../assets/icons/cake.png'
+import cakePng from '../../../public/assets/icons/cake.png'
+
 
 const StyledCard = styled(Card)({
   background: '#ffffff',

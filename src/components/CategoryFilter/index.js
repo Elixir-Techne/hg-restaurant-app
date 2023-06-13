@@ -1,16 +1,19 @@
-import { Box, Card, TabScrollButton, Typography } from '@mui/material'
-import Tab from '@mui/material/Tab'
-import Tabs from '@mui/material/Tabs'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
-import { useEffect } from 'react'
-import { styled } from 'styled-components'
+import { Box, Card, TabScrollButton, Typography } from '@mui/material';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { styled } from 'styled-components';
+
+
 
 import { getCategories } from '@/utils/api'
 
-import breakFastPng from '../../assets/icons/breakfast.png'
-import menu from '../../utils/MenuItem.json'
+import breakFastPng from '../../../public/assets/icons/breakfast.png'
+import menu from '../../utils/MenuItem.json';
+
 
 const TabGroup = styled((props) => (
   <Tabs
