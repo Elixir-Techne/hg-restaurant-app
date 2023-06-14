@@ -7,9 +7,11 @@ import { styled } from 'styled-components';
 
 
 
-import { theme } from '@/theme'
+import { theme } from '@/theme';
 
-import DoorInSvg from '../../../public/assets/icons/DoorInSvg'
+
+
+import DoorInSvg from '../../app/assets/icons/DoorInSvg'
 
 
 const StyledInput = styled(InputBase)({

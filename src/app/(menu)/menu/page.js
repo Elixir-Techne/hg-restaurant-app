@@ -1,7 +1,7 @@
 'use client'
 
 import { Box } from '@mui/material'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import CategoryFilter from '@/components/CategoryFilter'
@@ -12,8 +12,10 @@ import ReorderCard from '@/components/ReorderCard'
 import { getMenu, getMenuItem } from '@/utils/api'
 
 export default function Menu() {
-  const { menuItem } = useParams()
+  const searchParams = useSearchParams()
   const router = useRouter()
+  const category = searchParams.get('category')
+
   const [isCustomizeable, setIsCustomizeable] = useState(false)
 
   //API for GET menu
@@ -33,7 +35,8 @@ export default function Menu() {
   const handleAddItemClick = (item) => {
     if (item.customize) {
       setIsCustomizeable(true)
-    } else {
+    }
+    else {
       router.push('/order')
     }
   }
@@ -45,8 +48,8 @@ export default function Menu() {
 
   return (
     <>
-      <CategoryFilter value={menuItem} />
-      {menuItem === 'for-you' ? (
+      <CategoryFilter value={category} />
+      {category === 'for-you' ? (
         <>
           <RecommendedCard />
           <ReorderCard />

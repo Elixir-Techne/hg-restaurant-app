@@ -1,19 +1,16 @@
-import { Box, Card, TabScrollButton, Typography } from '@mui/material';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { styled } from 'styled-components';
-
-
+import { Box, Card, Typography } from '@mui/material'
+import Tab from '@mui/material/Tab'
+import Tabs from '@mui/material/Tabs'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { styled } from 'styled-components'
 
 import { getCategories } from '@/utils/api'
 
 import breakFastPng from '../../../public/assets/icons/breakfast.png'
-import menu from '../../utils/MenuItem.json';
-
+import menu from '../../utils/MenuItem.json'
 
 const TabGroup = styled((props) => (
   <Tabs
@@ -39,8 +36,7 @@ const TabGroup = styled((props) => (
 })
 
 export default function CategoryFilter({ tabs, onTabSelect, value }) {
-  const activeItem = menu.menuItems.find((item) => item.path === value)
-  const [activeTab, setActiveTab] = useState(activeItem?.id)
+  const [activeTab, setActiveTab] = useState(1)
   const router = useRouter()
 
   // API for GET Menu
@@ -51,10 +47,17 @@ export default function CategoryFilter({ tabs, onTabSelect, value }) {
   //     .catch((err) => console.log(err))
   // }, [])
 
+  useEffect(() => {
+    if (value) {
+      const activeItem = menu.menuItems.find((item) => item.path === value)
+      setActiveTab(activeItem.id)
+    }
+  }, [value])
+
   const handleChange = (event, newValue) => {
     const activeItem = menu.menuItems.find((item) => item.id === newValue)
     setActiveTab(newValue)
-    router.push(`/${activeItem.path}`)
+    router.push(`/menu?category=${activeItem.path}`)
     // onTabSelect(newValue)
   }
   return (
