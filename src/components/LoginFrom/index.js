@@ -1,17 +1,24 @@
-'use client';
+'use client'
 
-import { Box, Button, Card, CardActions, CardHeader, Checkbox, Divider, Typography, useMediaQuery } from '@mui/material';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { styled } from 'styled-components';
-
-
+import {
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Checkbox,
+  Divider,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { styled } from 'styled-components'
 
 import LoginInput from '@/components/LoginInput'
 import SocialLogin from '@/components/SocialLogin'
 
-import DoorInSvg from '../../../public/assets/icons/DoorInSvg'
 import LoginPng from '../../../public/assets/icons/login.png'
+import DoorInSvg from '../../app/assets/icons/DoorInSvg'
 
 const StyledCard = styled(Card)({
   filter: 'drop-shadow(0px 6px 3px rgba(0,0,0,0.16 ));',
@@ -26,7 +33,7 @@ export default function LoginForm() {
   const router = useRouter()
 
   const handleLoginClick = () => {
-    router.push('/for-you')
+    router.push('/menu?category=for-you')
   }
 
   return (

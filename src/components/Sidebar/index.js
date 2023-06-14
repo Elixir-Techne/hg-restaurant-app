@@ -1,15 +1,27 @@
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import { Avatar, Box, Button, Card, Collapse, Divider, Drawer, List, ListItemButton, ListItemText, ListSubheader, Typography } from '@mui/material';
-import { useRouter } from 'next/navigation';
-import * as React from 'react';
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  Collapse,
+  Divider,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  ListSubheader,
+  Typography,
+} from '@mui/material'
+import { useRouter } from 'next/navigation'
+import * as React from 'react'
 import { useEffect } from 'react'
 
 import { getCategories } from '@/utils/api'
 
-import DoorInSvg from '../../../public/assets/icons/DoorInSvg'
-import menu from '../../utils/MenuItem.json';
-
+import DoorInSvg from '../../app/assets/icons/DoorInSvg'
+import menu from '../../utils/MenuItem.json'
 
 export default function Sidebar({ open, onClose }) {
   const [openSubmenu, setOpenSubmenu] = React.useState('')
@@ -25,11 +37,9 @@ export default function Sidebar({ open, onClose }) {
 
   const handleClick = (item) => {
     if (item.hasSubMenu && item.id === openSubmenu) setOpenSubmenu('')
-    else if (item.hasSubMenu) {
-      setOpenSubmenu(item.id)
-      router.push(`/${item.path}`)
-    } else {
-      router.push(`/${item.path}`)
+    else {
+      if (item.hasSubMenu) setOpenSubmenu(item.id)
+      router.push(`/menu?category=${item.path}`)
     }
   }
 
@@ -93,10 +103,9 @@ export default function Sidebar({ open, onClose }) {
         }
       >
         {menu.menuItems.map((item) => (
-          <>
+          <React.Fragment key={item.id}>
             <ListItemButton
               onClick={() => handleClick(item)}
-              key={item.id}
               sx={{ py: '1px' }}
             >
               <ListItemText
@@ -133,7 +142,7 @@ export default function Sidebar({ open, onClose }) {
                 ))}
               </Collapse>
             )}
-          </>
+          </React.Fragment>
         ))}
       </List>
       <Card

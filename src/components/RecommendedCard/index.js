@@ -3,6 +3,8 @@ import { styled } from 'styled-components'
 
 import MenuCard from '../MenuCard'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import CustomizeDrawer from '../CustomizeDrawer'
 
 const StyledCard = styled(Card)({
   background: 'transparent',
@@ -13,7 +15,19 @@ const StyledCard = styled(Card)({
 
 export default function RecommendedCard() {
   const router = useRouter()
-  const handleAddItemClick = () => {
+  const [isCustomizeable, setIsCustomizeable] = useState(false)
+
+  const handleAddItemClick = (item) => {
+    if (item.customize) {
+      setIsCustomizeable(true)
+    }
+    else {
+      router.push('/order')
+    }
+  }
+
+  const handleCustomizeAddItemClick = () => {
+    setIsCustomizeable(false)
     router.push('/order')
   }
   return (
@@ -42,6 +56,13 @@ export default function RecommendedCard() {
           <MenuCard onClick={handleAddItemClick} />
         </Box>
       </CardContent>
+      {isCustomizeable && (
+        <CustomizeDrawer
+          open={isCustomizeable}
+          onClose={() => setIsCustomizeable(false)}
+          onClick={handleCustomizeAddItemClick}
+        />
+      )}
     </StyledCard>
   )
 }
