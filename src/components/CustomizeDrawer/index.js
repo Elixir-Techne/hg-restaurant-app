@@ -10,7 +10,7 @@ const data = [
   { id: 3, name: ' Caesar Salad [Beef]', price: '+ MYR 25.00' },
 ]
 
-export default function CustomizeDrawer({ open, onClose,onClick }) {
+export default function CustomizeDrawer({ open, onClose, onClick }) {
   const [selectedValue, setSelectedValue] = useState(1)
   const handleChange = (event) => {
     setSelectedValue(event.target.value)
@@ -29,7 +29,7 @@ export default function CustomizeDrawer({ open, onClose,onClick }) {
         width: '321px',
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: '321px',
+          width: '95%',
           boxSizing: 'border-box',
           backgroundColor: '#F3F3F5',
           margin: 'auto !important',
@@ -37,6 +37,18 @@ export default function CustomizeDrawer({ open, onClose,onClick }) {
           filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
           borderTopLeftRadius: '23px',
           borderTopRightRadius: '23px',
+          '@media (max-height:915px)': {
+            gap: '6vh',
+          },
+          '@media (max-height:865px)': {
+            gap: '5vh',
+          },
+          '@media (max-height:815px)': {
+            gap: '2.5vh',
+          },
+          '@media (max-height:715px)': {
+            gap: 0,
+          },
         },
         '& .MuiModal-backdrop': {
           backgroundColor: 'transparent',
@@ -125,7 +137,12 @@ export default function CustomizeDrawer({ open, onClose,onClick }) {
           backgroundColor: '#FFFFFF',
         }}
       >
-        <Button variant="contained" fullWidth sx={{ borderRadius: '12px' }} onClick={onClick}>
+        <Button
+          variant="contained"
+          fullWidth
+          sx={{ borderRadius: '12px' }}
+          onClick={onClick}
+        >
           <Typography>ADD +</Typography>
         </Button>
       </Card>

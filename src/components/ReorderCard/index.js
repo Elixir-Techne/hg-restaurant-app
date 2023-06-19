@@ -22,7 +22,7 @@ export default function ReorderCard() {
             variant="h6"
             sx={{ color: '#707070', fontWeight: 'bold' }}
           >
-            REORDED
+            REORDERED
           </Typography>
         }
         subheader={
