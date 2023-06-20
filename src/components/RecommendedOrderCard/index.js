@@ -1,11 +1,10 @@
-'use client';
+'use client'
 
-import { Box, Button, Card, CardHeader, Typography } from '@mui/material';
-import Image from 'next/image';
+import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
+import Image from 'next/image'
 import { styled } from 'styled-components'
 
 import cakePng from '../../../public/assets/icons/cake.png'
-
 
 const StyledCard = styled(Card)({
   background: '#ffffff',
@@ -42,6 +41,7 @@ export default function RecommendedOrderCard() {
         height: '121px',
         boxShadow: 'none',
         filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
+        overflowX: 'auto',
       }}
     >
       <CardHeader
@@ -52,7 +52,7 @@ export default function RecommendedOrderCard() {
         }
         sx={{ padding: '8px' }}
       />
-      <Box mx={4} sx={{ overflowX: 'auto' }} display="flex" gap="10px">
+      <Box mx={4} display="flex" gap="10px">
         {data.map((item) => (
           <StyledCard key={item.id}>
             <Image

@@ -35,8 +35,7 @@ export default function Menu() {
   const handleAddItemClick = (item) => {
     if (item.customize) {
       setIsCustomizeable(true)
-    }
-    else {
+    } else {
       router.push('/order')
     }
   }

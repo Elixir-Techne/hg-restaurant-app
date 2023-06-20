@@ -1,9 +1,8 @@
-import { Box, Button, Card, Chip, Typography } from '@mui/material';
-import Image from 'next/image';
+import { Box, Button, Card, Chip, Typography } from '@mui/material'
+import Image from 'next/image'
 import { styled } from 'styled-components'
 
 import cakePng from '../../../public/assets/icons/cake.png'
-
 
 const StyledCard = styled(Card)({
   filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
@@ -66,7 +65,7 @@ const data = [
 ]
 
 export default function MenuCard({ onClick }) {
-  return data.map((item) => (
+  return data?.map((item) => (
     <StyledCard key={item.id}>
       {item.trending && <StyleChip label="Trending #1" />}
       <Image src={cakePng} alt="" style={{ height: '157px' }} />
