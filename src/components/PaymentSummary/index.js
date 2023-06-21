@@ -33,7 +33,7 @@ export default function PaymentSummary() {
           TOTAL PAYMENT
         </Typography>
         <Typography sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-          MYR 15.30
+          MYR 16.51
         </Typography>
       </Box>
     </Card>
