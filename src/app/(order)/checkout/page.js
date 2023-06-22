@@ -2,7 +2,17 @@
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  IconButton,
+  LinearProgress,
+  Typography,
+} from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { styled } from 'styled-components'
@@ -12,6 +22,8 @@ import PaymentSummary from '@/components/PaymentSummary'
 import RecommendedOrderCard from '@/components/RecommendedOrderCard'
 import { getOrderByID, getOrders } from '@/utils/api'
 
+import Loader from '../../../components/loader/loader'
+
 const StyledCard = styled(Card)({
   height: '82px',
   minWidth: '378px',
@@ -19,12 +31,20 @@ const StyledCard = styled(Card)({
   boxShadow: 'none',
   position: 'relative',
 })
-
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    padding: '0',
+    backgroundColor: 'white',
+    color: '#035942',
+    fontWeight: 'bold',
+  },
+  '& .MuiSvgIcon-root': {
+    color: '#C8C7C8',
+  },
+}))
 export default function Order() {
   const router = useRouter()
-  const handleConfirmOrder = () => {
-    router.push('/checkout')
-  }
+
   //API for GET orders
 
   // useEffect(() => {
@@ -47,19 +67,23 @@ export default function Order() {
           onClick={() => router.back()}
         />
         <CardHeader
-          title={<Typography variant="h4">ORDER CART</Typography>}
+          title={<Typography variant="h4">RECOMMENDATION</Typography>}
           sx={{ textAlign: 'center' }}
-          subheader={
-            <Typography sx={{ color: '#5D5A5A', fontStyle: 'bold' }}>
-              DOME @ PCC
-            </Typography>
-          }
         />
       </StyledCard>
-      <RecommendedOrderCard />
-      <OrderList />
+      <Box sx={{ width: '100%', textAlign: 'center' }}>
+        <Typography
+          sx={{
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            textTransform: 'uppercase',
+          }}
+        >
+          We also recommend these
+        </Typography>
+        <Loader />
+      </Box>
       <Box mt="auto">
-        <PaymentSummary />
         <Card
           sx={{
             boxShadow: 'none',
@@ -70,11 +94,26 @@ export default function Order() {
           <Button
             variant="contained"
             fullWidth
-            sx={{ borderRadius: '12px' }}
-            onClick={handleConfirmOrder}
+            sx={{
+              borderRadius: '12px',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
           >
-            <Typography sx={{ mr: '10px' }}>CONFIRM ORDER</Typography>
-            <ArrowForwardIosIcon />
+            <Box display="flex" alignItems="center">
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={1} color="primary">
+                  <ShoppingCartIcon />
+                </StyledBadge>
+              </IconButton>
+              <Typography sx={{ fontSize: '14px', marginLeft: '0.5rem' }}>
+                MYR 16.51
+              </Typography>
+            </Box>
+            <Box display="flex">
+              <Typography sx={{ mr: '10px' }}>Checkout</Typography>
+              <ArrowForwardIosIcon />
+            </Box>
           </Button>
         </Card>
       </Box>
