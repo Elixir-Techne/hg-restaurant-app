@@ -4,7 +4,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 
 import OrderList from '@/components/OrderLIst'
@@ -19,8 +19,31 @@ const StyledCard = styled(Card)({
   boxShadow: 'none',
   position: 'relative',
 })
-
+const recommendData = [
+  {
+    id: 1,
+    name: ' Chocolate Shake',
+    price: ' 16.51',
+    quantity: 1,
+  },
+  {
+    id: 2,
+    name: ' Chocolate Shake',
+    price: ' 16.51',
+    quantity: 1,
+  },
+  {
+    id: 3,
+    name: ' Chocolate Shake',
+    price: ' 16.51',
+    quantity: 1,
+  },
+]
 export default function Order() {
+  const [orderSummary, setOrderSummary] = useState([
+    { id: 0, name: 'Heavenly Scone', price: '16.51', quantity: 1 },
+  ])
+  console.log(orderSummary)
   const router = useRouter()
   const handleConfirmOrder = () => {
     router.push('/checkout')
@@ -56,10 +79,17 @@ export default function Order() {
           }
         />
       </StyledCard>
-      <RecommendedOrderCard />
-      <OrderList />
+      <RecommendedOrderCard
+        data={recommendData}
+        setOrderSummary={setOrderSummary}
+        orderSummary={orderSummary}
+      />
+      <OrderList
+        orderSummary={orderSummary}
+        setOrderSummary={setOrderSummary}
+      />
       <Box mt="auto">
-        <PaymentSummary />
+        <PaymentSummary orderSummary={orderSummary} />
         <Card
           sx={{
             boxShadow: 'none',
