@@ -15,25 +15,15 @@ const StyledCard = styled(Card)({
   display: 'flex',
 })
 
-const data = [
-  {
-    id: 1,
-    name: ' Chocolate Shake',
-    price: ' MYR 16.51',
-  },
-  {
-    id: 2,
-    name: ' Chocolate Shake',
-    price: ' MYR 16.51',
-  },
-  {
-    id: 3,
-    name: ' Chocolate Shake',
-    price: ' MYR 16.51',
-  },
-]
-
-export default function RecommendedOrderCard() {
+export default function RecommendedOrderCard({
+  data,
+  setOrderSummary,
+  orderSummary,
+}) {
+  const handleAddOrder = (id) => {
+    const order = data.find((el) => el.id === id)
+    setOrderSummary((prev) => [...prev, order])
+  }
   return (
     <Card
       sx={{
@@ -74,12 +64,13 @@ export default function RecommendedOrderCard() {
                   {item.name}
                 </Typography>
                 <Typography sx={{ color: '#5D5A5A', fontSize: '10px' }}>
-                  {item.price}
+                  MYR {item.price}
                 </Typography>
               </Box>
               <Button
                 variant="contained"
                 sx={{ height: '19px', width: '131px', mx: 6 }}
+                onClick={() => handleAddOrder(item.id)}
               >
                 <Typography sx={{ fontSize: '10px' }}>Add +</Typography>
               </Button>

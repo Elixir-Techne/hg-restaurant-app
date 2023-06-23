@@ -1,6 +1,15 @@
 import { Box, Card, Divider, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
-export default function PaymentSummary() {
+export default function PaymentSummary({ orderSummary }) {
+  const [total, setTotal] = useState('')
+  useEffect(() => {
+    const totalPrice = orderSummary.reduce(
+      (sum, object) => sum + parseFloat(object.price * object.quantity),
+      0,
+    )
+    setTotal(totalPrice.toFixed(2))
+  }, [orderSummary])
   return (
     <Card
       sx={{
@@ -33,7 +42,7 @@ export default function PaymentSummary() {
           TOTAL PAYMENT
         </Typography>
         <Typography sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-          MYR 16.51
+          MYR {total}
         </Typography>
       </Box>
     </Card>

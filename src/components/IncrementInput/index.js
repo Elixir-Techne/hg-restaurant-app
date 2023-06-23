@@ -8,16 +8,36 @@ const StyledButton = styled(Button)({
   padding: 0,
 })
 
-export default function IncrementInput() {
+export default function IncrementInput({ orderSummary, setOrderSummary, id }) {
   const [itemCount, setItemCount] = useState(1)
 
   const handleDecrementClick = () => {
     if (itemCount === 0) return
     else setItemCount(itemCount - 1)
+    setOrderSummary((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: item.quantity - 1,
+            }
+          : item,
+      ),
+    )
   }
 
   const handleIncrementClick = () => {
     setItemCount(itemCount + 1)
+    setOrderSummary((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
+          : item,
+      ),
+    )
   }
 
   return (
