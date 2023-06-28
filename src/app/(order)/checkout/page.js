@@ -13,37 +13,33 @@ import {
   LinearProgress,
   Typography,
 } from '@mui/material'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 
 import OrderList from '@/components/OrderLIst'
 import PaymentSummary from '@/components/PaymentSummary'
 import RecommendedOrderCard from '@/components/RecommendedOrderCard'
+import { OrdersContext } from '@/context/orderContext'
+// import { recommendData } from '@/context/orderContext'
 import { getOrderByID, getOrders } from '@/utils/api'
 
+import cakePng from '../../../../public/assets/icons/cake.png'
 import Loader from '../../../components/loader/loader'
+import {
+  StyledBadge,
+  StyledCard,
+  StyledRecommendedCard,
+  UseStyle,
+} from './styles'
 
-const StyledCard = styled(Card)({
-  height: '82px',
-  minWidth: '378px',
-  filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
-  boxShadow: 'none',
-  position: 'relative',
-})
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  '& .MuiBadge-badge': {
-    padding: '0',
-    backgroundColor: 'white',
-    color: '#035942',
-    fontWeight: 'bold',
-  },
-  '& .MuiSvgIcon-root': {
-    color: '#C8C7C8',
-  },
-}))
 export default function Order() {
+  const { recommendData, totalBillingPrice, totalQuantity } =
+    useContext(OrdersContext)
   const router = useRouter()
+  const classes = UseStyle()
+  const [quantity, setQuantity] = useState('')
 
   //API for GET orders
 
@@ -63,55 +59,35 @@ export default function Order() {
     <Box display="flex" flexDirection="column" height="100vh">
       <StyledCard>
         <ArrowBackIosNewIcon
-          sx={{ position: 'absolute', top: 25, left: 5 }}
+          className={classes.arrowBackIosNewIcon}
           onClick={() => router.back()}
         />
         <CardHeader
           title={<Typography variant="h4">RECOMMENDATION</Typography>}
-          sx={{ textAlign: 'center' }}
+          className={classes.cardHeader}
         />
       </StyledCard>
-      <Box sx={{ width: '100%', textAlign: 'center' }}>
-        <Typography
-          sx={{
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            textTransform: 'uppercase',
-          }}
-        >
+      <Box className={classes.textContainer}>
+        <Typography className={classes.textTypography}>
           We also recommend these
         </Typography>
         <Loader />
       </Box>
       <Box mt="auto">
-        <Card
-          sx={{
-            boxShadow: 'none',
-            padding: '1rem',
-            backgroundColor: '#F3F3F5',
-          }}
-        >
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{
-              borderRadius: '12px',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
+        <Card className={classes.card}>
+          <Button variant="contained" fullWidth className={classes.button}>
             <Box display="flex" alignItems="center">
               <IconButton aria-label="cart">
-                <StyledBadge badgeContent={1} color="primary">
+                <StyledBadge badgeContent={totalQuantity} color="primary">
                   <ShoppingCartIcon />
                 </StyledBadge>
               </IconButton>
-              <Typography sx={{ fontSize: '14px', marginLeft: '0.5rem' }}>
-                MYR 16.51
+              <Typography className={classes.billingPrice}>
+                {totalBillingPrice}
               </Typography>
             </Box>
             <Box display="flex">
-              <Typography sx={{ mr: '10px' }}>Checkout</Typography>
+              <Typography className={classes.checkoutBox}>Checkout</Typography>
               <ArrowForwardIosIcon />
             </Box>
           </Button>

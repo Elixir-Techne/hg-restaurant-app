@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles'
 
 import { theme } from '@/theme'
 
+import { OrdersProvider } from '../context/orderContext'
 import './global.css'
 
 export default function RootLayout({ children }) {
@@ -12,7 +13,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <body style={{backgroundColor: '#F3F3F5',}}>{children}</body>
+        <body style={{ backgroundColor: '#F3F3F5' }}>
+          <OrdersProvider>{children}</OrdersProvider>
+        </body>
       </ThemeProvider>
     </html>
   )

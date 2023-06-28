@@ -8,13 +8,12 @@ import { styled } from 'styled-components'
 import MobileMenuSvg from '../../../public/assets/icons/feather-menu.svg'
 import SearchSvg from '../../../public/assets/icons/search.svg'
 import Sidebar from '../Sidebar'
+import { StyledTextField, UseStyle } from './styles'
 
-const StyledTextField = styled(TextField)({
-  background: 'white',
-})
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [searchToggle, setSearchToggle] = useState(false)
+  const classes = UseStyle()
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen)
   }
@@ -25,22 +24,13 @@ export default function Header() {
     setSearchToggle(false)
   }
   return (
-    <Box
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      my={4}
-    >
+    <Box my={4} className={classes.mainContainer}>
       <IconButton onClick={handleDrawerToggle}>
         <Image src={MobileMenuSvg} alt="" />
       </IconButton>
       {drawerOpen && <Sidebar open={drawerOpen} onClose={handleDrawerToggle} />}
       {searchToggle ? (
-        <Box
-          display="flex"
-          alignItems="center"
-          sx={{ width: '100%', marginRight: '0.5rem' }}
-        >
+        <Box className={classes.subContainer}>
           <StyledTextField
             id="outlined-basic"
             placeholder="Search"
@@ -49,7 +39,7 @@ export default function Header() {
           />
           <CloseIcon
             fontSize="large"
-            style={{ color: '#067153' }}
+            className={classes.icon}
             onClick={handleCancel}
           />
         </Box>
@@ -57,7 +47,7 @@ export default function Header() {
       {!searchToggle ? (
         <IconButton onClick={handleSearch}>
           {/* <Image src={<SearchIcon />} alt="" /> */}
-          <SearchIcon fontSize="large" style={{ color: '#067153' }} />
+          <SearchIcon fontSize="large" className={classes.icon} />
         </IconButton>
       ) : null}
     </Box>

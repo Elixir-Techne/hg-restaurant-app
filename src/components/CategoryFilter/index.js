@@ -5,39 +5,17 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { styled } from 'styled-components'
 
 import { getCategories } from '@/utils/api'
 
 import breakFastPng from '../../../public/assets/icons/breakfast.png'
 import menu from '../../utils/MenuItem.json'
-
-const TabGroup = styled((props) => (
-  <Tabs
-    {...props}
-    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
-  />
-))({
-  borderBottom: '1px solid #70707050',
-  '& .MuiTabs-indicator': {
-    borderBottom: '5px solid #f3f3f5 !important',
-    borderRadius: '8px',
-    display: 'flex',
-    justifyContent: 'center',
-    bottom: '5px',
-    zIndex: -1,
-  },
-  '& .MuiTabs-indicatorSpan': {
-    border: '3px solid #067153 ',
-    borderRadius: '8px',
-    maxWidth: '70%',
-    width: '80%',
-  },
-})
+import { TabGroup, UseStyle } from './styles'
 
 export default function CategoryFilter({ tabs, onTabSelect, value }) {
   const [activeTab, setActiveTab] = useState(1)
   const router = useRouter()
+  const classes = UseStyle()
 
   // API for GET Menu
 
@@ -61,14 +39,7 @@ export default function CategoryFilter({ tabs, onTabSelect, value }) {
     // onTabSelect(newValue)
   }
   return (
-    <Card
-      sx={{
-        filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
-        boxShadow: 'none',
-        backgroundColor: '#F3F3F5',
-        mb: 4,
-      }}
-    >
+    <Card className={classes.mainContainer}>
       <TabGroup
         value={activeTab}
         onChange={handleChange}
@@ -81,22 +52,9 @@ export default function CategoryFilter({ tabs, onTabSelect, value }) {
               key={item.id}
               value={item.id}
               label={
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  height="100%"
-                  maxWidth="30%"
-                >
+                <Box className={classes.tabBox}>
                   <Image src={breakFastPng} width="50px" height="50px" alt="" />
-                  <Typography
-                    sx={{
-                      color: '#067153',
-                      fontSize: '10px',
-                      fontWeight: 'bold',
-                      marginBottom: '5px',
-                    }}
-                  >
+                  <Typography className={classes.tabTypography}>
                     {item.name}
                   </Typography>
                 </Box>
@@ -107,16 +65,10 @@ export default function CategoryFilter({ tabs, onTabSelect, value }) {
       </TabGroup>
       {value === 'for-you' && (
         <Box display="flex" gap="20px" mx={4} my={2}>
-          <Typography
-            sx={{ color: '#707070', fontSize: '11px', fontWeight: 'bold' }}
-          >
+          <Typography className={classes.recommenedTypography}>
             Recommended
           </Typography>
-          <Typography
-            sx={{ color: '#707070', fontSize: '11px', fontWeight: 'bold' }}
-          >
-            Reorder
-          </Typography>
+          <Typography className={classes.reorderTypography}>Reorder</Typography>
         </Box>
       )}
     </Card>

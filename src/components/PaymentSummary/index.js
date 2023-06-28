@@ -1,48 +1,52 @@
 import { Box, Card, Divider, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
-export default function PaymentSummary({ orderSummary }) {
-  const [total, setTotal] = useState('')
+import { OrdersContext } from '../../context/orderContext'
+import { UseStyle } from './styles'
+
+export default function PaymentSummary() {
+  const {
+    setTotalBillingPrice,
+    totalBillingPrice,
+    setTotalQuantity,
+    setOrderItem,
+    orderItem,
+  } = useContext(OrdersContext)
+
+  const classes = UseStyle()
+
   useEffect(() => {
-    const totalPrice = orderSummary.reduce(
-      (sum, object) => sum + parseFloat(object.price * object.quantity),
+    const totalPrice = orderItem.reduce(
+      (sum, object) =>
+        sum +
+        parseFloat(
+          `${object.price * object.quantity}` + `${object?.item?.price || 0}`,
+        ),
       0,
     )
-    setTotal(totalPrice.toFixed(2))
-  }, [orderSummary])
+    const quantity = orderItem.reduce(
+      (sum, object) => sum + parseFloat(object.quantity),
+      0,
+    )
+    setTotalQuantity(quantity)
+    setTotalBillingPrice(totalPrice.toFixed(2))
+  }, [orderItem])
+
   return (
-    <Card
-      sx={{
-        backgroundColor: '#FFFFFF',
-        height: '98px',
-        boxShadow: 'none',
-      }}
-    >
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        mx={4}
-        my={4}
-      >
-        <Typography sx={{ color: '#8A8787', fontSize: '14px' }}>
+    <Card className={classes.maincontainer}>
+      <Box className={classes.subContainer}>
+        <Typography className={classes.paymentTypography}>
           PAYMENT SUMMARY
         </Typography>
-        <Typography sx={{ fontSize: '14px' }}>View Details</Typography>
+        <Typography className={classes.viewTypography}>View Details</Typography>
       </Box>
       <Divider variant="middle" />
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        mx={4}
-        my={2}
-      >
-        <Typography sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+      <Box className={classes.subContainer} my={2}>
+        <Typography className={classes.totalTypography}>
           TOTAL PAYMENT
         </Typography>
-        <Typography sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-          MYR {total}
+        <Typography className={classes.totalTypography}>
+          MYR {totalBillingPrice}
         </Typography>
       </Box>
     </Card>

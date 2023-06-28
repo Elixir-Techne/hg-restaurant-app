@@ -1,8 +1,10 @@
-import { Box } from '@mui/material';
-import { createButton } from 'react-social-login-buttons';
+import { Box } from '@mui/material'
+import { createButton } from 'react-social-login-buttons'
 
+import { UseStyle } from './styles'
 
 export default function SocialLogin({ onClick }) {
+  const classes = UseStyle()
   const fbConfig = {
     text: 'SIGN IN WITH FACEBOOK',
     icon: 'facebook',
@@ -43,15 +45,7 @@ export default function SocialLogin({ onClick }) {
   const MyGoogleLoginButton = createButton(gConfig)
 
   return (
-    <Box
-      gap="25px"
-      display="flex"
-      flexDirection="column"
-      sx={{
-        marginX: (theme) => theme.spacing(10),
-        marginTop: (theme) => theme.spacing(8),
-      }}
-    >
+    <Box className={classes.maincontainer}>
       <MyFacebookLoginButton onClick={onClick} />
       <MyGoogleLoginButton onClick={onClick} />
     </Box>
