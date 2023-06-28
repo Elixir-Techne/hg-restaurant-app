@@ -1,20 +1,20 @@
 import { Box, Button, IconButton, Typography } from '@mui/material'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { styled } from 'styled-components'
 
-const StyledButton = styled(Button)({
-  minWidth: '24px ',
-  height: '19px',
-  padding: 0,
-})
+import { OrdersContext } from '@/context/orderContext'
 
-export default function IncrementInput({ orderSummary, setOrderSummary, id }) {
+import { StyledButton, UseStyle } from './styles'
+
+export default function IncrementInput({ id }) {
   const [itemCount, setItemCount] = useState(1)
+  const { setOrderItem, orderItem } = useContext(OrdersContext)
 
+  const classes = UseStyle()
   const handleDecrementClick = () => {
     if (itemCount === 0) return
     else setItemCount(itemCount - 1)
-    setOrderSummary((prev) =>
+    setOrderItem((prev) =>
       prev.map((item) =>
         item.id === id
           ? {
@@ -28,7 +28,7 @@ export default function IncrementInput({ orderSummary, setOrderSummary, id }) {
 
   const handleIncrementClick = () => {
     setItemCount(itemCount + 1)
-    setOrderSummary((prev) =>
+    setOrderItem((prev) =>
       prev.map((item) =>
         item.id === id
           ? {
@@ -41,22 +41,20 @@ export default function IncrementInput({ orderSummary, setOrderSummary, id }) {
   }
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between">
+    <Box className={classes.maincontainer}>
       <StyledButton
         variant="contained"
-        sx={{ borderTopLeftRadius: '6px', borderBottomLeftRadius: '7px' }}
+        className={classes.styledButton}
         onClick={handleDecrementClick}
         disabled={itemCount === 0}
       >
         -
       </StyledButton>
-      <Typography sx={{ margin: '5px', fontWeight: 'bold' }}>
-        {itemCount}
-      </Typography>
+      <Typography className={classes.typography}>{itemCount}</Typography>
       <StyledButton
         variant="contained"
         onClick={handleIncrementClick}
-        sx={{ borderTopRightRadius: '6px', borderBottomRightRadius: '7px' }}
+        className={classes.styledButton}
       >
         +
       </StyledButton>

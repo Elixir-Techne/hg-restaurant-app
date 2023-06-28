@@ -1,32 +1,32 @@
 import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { useRouter } from 'next/navigation'
+import { useContext, useState } from 'react'
 import { styled } from 'styled-components'
 
-import MenuCard from '../MenuCard'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import CustomizeDrawer from '../CustomizeDrawer'
+import { OrdersContext } from '@/context/orderContext'
 
-const StyledCard = styled(Card)({
-  background: 'transparent',
-  borderTop: '1px solid #70707050',
-  boxShadow: 'none',
-  borderBottom: '1px solid #70707050',
-})
+import CustomizeDrawer from '../CustomizeDrawer'
+import MenuCard from '../MenuCard'
+import { StyledCard, UseStyle } from './styles'
 
 export default function RecommendedCard() {
   const router = useRouter()
   const [isCustomizeable, setIsCustomizeable] = useState(false)
-
+  const [currentItem, setCurrentItem] = useState(null)
+  const classes = UseStyle()
+  const { data, setOrderItem } = useContext(OrdersContext)
   const handleAddItemClick = (item) => {
     if (item.customize) {
+      setCurrentItem(item)
       setIsCustomizeable(true)
-    }
-    else {
+    } else {
+      setOrderItem((prev) => [...prev, item])
       router.push('/order')
     }
   }
 
-  const handleCustomizeAddItemClick = () => {
+  const handleCustomizeAddItemClick = (e, item) => {
+    setOrderItem((prev) => [...prev, item, currentItem])
     setIsCustomizeable(false)
     router.push('/order')
   }
@@ -34,26 +34,20 @@ export default function RecommendedCard() {
     <StyledCard>
       <CardHeader
         title={
-          <Typography
-            variant="h6"
-            sx={{ color: '#707070', fontWeight: 'bold' }}
-          >
+          <Typography variant="h6" className={classes.recommanedTitle}>
             RECOMMENDED FOR YOU
           </Typography>
         }
         subheader={
-          <Typography
-            variant="caption"
-            sx={{ color: '#9C9797', fontWeight: 'bold' }}
-          >
+          <Typography variant="caption" className={classes.subheaderTitle}>
             Curated because you are unique
           </Typography>
         }
-        sx={{ paddingBottom: '0px' }}
+        className={classes.subheader}
       />
       <CardContent>
-        <Box display="flex" gap="10px" sx={{ overflowX: 'auto' }} pb={2}>
-          <MenuCard onClick={handleAddItemClick} />
+        <Box className={classes.cardContent}>
+          <MenuCard onClick={handleAddItemClick} data={data} />
         </Box>
       </CardContent>
       {isCustomizeable && (
@@ -61,6 +55,7 @@ export default function RecommendedCard() {
           open={isCustomizeable}
           onClose={() => setIsCustomizeable(false)}
           onClick={handleCustomizeAddItemClick}
+          currentItem={currentItem}
         />
       )}
     </StyledCard>

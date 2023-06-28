@@ -22,10 +22,12 @@ import { getCategories } from '@/utils/api'
 
 import DoorInSvg from '../../app/assets/icons/DoorInSvg'
 import menu from '../../utils/MenuItem.json'
+import { UseStyle } from './styles'
 
 export default function Sidebar({ open, onClose }) {
   const [openSubmenu, setOpenSubmenu] = React.useState('')
   const router = useRouter()
+  const classes = UseStyle()
 
   //API for GET Menu
 
@@ -45,60 +47,30 @@ export default function Sidebar({ open, onClose }) {
 
   return (
     <Drawer
-      sx={{
-        width: '270px',
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          width: '270px',
-          boxSizing: 'border-box',
-          backgroundColor: '#F3F3F5',
-        },
-        '& .MuiModal-backdrop': {
-          backgroundColor: 'transparent',
-          backdropFilter: 'blur(1px)',
-        },
-      }}
+      className={classes.drawer}
       variant="temporary"
       anchor="left"
       open={open}
       onClose={onClose}
     >
-      <Box
-        mx={16}
-        mt={8}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        gap="8px"
-      >
-        <Avatar
-          sx={{ width: '112px', height: '120px', border: '2px solid black' }}
-        />
-        <Typography sx={{ color: '#999999', fontSize: '18px' }} gutterBottom>
+      <Box className={classes.container}>
+        <Avatar className={classes.avatar} />
+        <Typography className={classes.guestTypography} gutterBottom>
           GUEST
         </Typography>
       </Box>
       <Divider variant="middle" />
       <List
-        sx={{
-          width: '270px',
-          maxWidth: '270px',
-          bgcolor: '#F3F3F5',
-          px: '24px',
-          overflowY: 'scroll',
-          backdropFilter: 'blur',
-        }}
+        className={classes.list}
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader
             component="div"
             id="nested-list-subheader"
-            sx={{ bgcolor: '#F3F3F5' }}
+            className={classes.listSubheader}
           >
-            <Typography sx={{ color: '#747272', fontSize: '18px' }}>
-              MENU
-            </Typography>
+            <Typography className={classes.listTypography}>MENU</Typography>
           </ListSubheader>
         }
       >
@@ -106,18 +78,18 @@ export default function Sidebar({ open, onClose }) {
           <React.Fragment key={item.id}>
             <ListItemButton
               onClick={() => handleClick(item)}
-              sx={{ py: '1px' }}
+              className={classes.listItemButton}
             >
               <ListItemText
                 primary={
-                  <Typography sx={{ color: '#747272', fontSize: '15px' }}>
+                  <Typography className={classes.listItemText}>
                     {item.name}
                   </Typography>
                 }
               />
               {openSubmenu === item.id
-                ? item.hasSubMenu && <ExpandLess sx={{ color: '#747272' }} />
-                : item.hasSubMenu && <ExpandMore sx={{ color: '#747272' }} />}
+                ? item.hasSubMenu && <ExpandLess className={classes.submenu} />
+                : item.hasSubMenu && <ExpandMore className={classes.submenu} />}
             </ListItemButton>
             {item.hasSubMenu && openSubmenu === item.id && (
               <Collapse
@@ -130,9 +102,7 @@ export default function Sidebar({ open, onClose }) {
                     <ListItemButton sx={{ pl: 4 }}>
                       <ListItemText
                         primary={
-                          <Typography
-                            sx={{ color: '#747272', fontSize: '15px' }}
-                          >
+                          <Typography className={classes.submenuItem}>
                             {subitem.name}
                           </Typography>
                         }

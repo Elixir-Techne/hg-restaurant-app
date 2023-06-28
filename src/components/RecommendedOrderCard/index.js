@@ -2,77 +2,52 @@
 
 import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
 import Image from 'next/image'
+import { useContext } from 'react'
 import { styled } from 'styled-components'
 
+import { OrdersContext } from '@/context/orderContext'
+
 import cakePng from '../../../public/assets/icons/cake.png'
+import { StyledCard, UseStyle } from './styles'
 
-const StyledCard = styled(Card)({
-  background: '#ffffff',
-  boxShadow: 'none',
-  borderRadius: '12px',
-  minHeight: '71px',
-  minWidth: '307px',
-  display: 'flex',
-})
-
-export default function RecommendedOrderCard({
-  data,
-  setOrderSummary,
-  orderSummary,
-}) {
+export default function RecommendedOrderCard({ data }) {
+  const classes = UseStyle()
+  const { setOrderItem } = useContext(OrdersContext)
   const handleAddOrder = (id) => {
     const order = data.find((el) => el.id === id)
-    setOrderSummary((prev) => [...prev, order])
+    setOrderItem((prev) => [...prev, order])
   }
   return (
-    <Card
-      sx={{
-        background: '#EDEDED',
-        height: '121px',
-        boxShadow: 'none',
-        filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
-        overflowX: 'auto',
-      }}
-    >
+    <Card className={classes.card}>
       <CardHeader
         title={
-          <Typography sx={{ color: '#5D5A5A', fontSize: '14px' }}>
+          <Typography className={classes.titleTypography}>
             WE ALSO RECOMMEND THESE
           </Typography>
         }
-        sx={{ padding: '8px' }}
+        className={classes.cardHeader}
       />
       <Box mx={4} display="flex" gap="10px">
         {data.map((item) => (
           <StyledCard key={item.id}>
-            <Image
-              src={cakePng}
-              alt=""
-              width={87}
-              height={71}
-              // style={{ height: '71px !important', width: '87px !important' }}
-            />
+            <Image src={cakePng} alt="" width={87} height={71} />
             <Box display="flex" flexDirection="column" mx={4} my={2}>
               <Box>
-                <Typography
-                  sx={{
-                    color: '#000000',
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                  }}
-                >
+                <Typography className={classes.itemName}>
                   {item.name}
                 </Typography>
-                <Typography sx={{ color: '#5D5A5A', fontSize: '10px' }}>
+                <Typography className={classes.itemPrice}>
                   MYR {item.price}
                 </Typography>
               </Box>
               <Button
                 variant="contained"
-                sx={{ height: '19px', width: '131px', mx: 6 }}
+                className={classes.button}
                 onClick={() => handleAddOrder(item.id)}
               >
-                <Typography sx={{ fontSize: '10px' }}>Add +</Typography>
+                <Typography className={classes.buttonTypography}>
+                  Add +
+                </Typography>
               </Button>
             </Box>
           </StyledCard>
