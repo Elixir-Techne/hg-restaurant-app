@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <body style={{ backgroundColor: '#F3F3F5' }}>
+        <body>
           <OrdersProvider>{children}</OrdersProvider>
         </body>
       </ThemeProvider>

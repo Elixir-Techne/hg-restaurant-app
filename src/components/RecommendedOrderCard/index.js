@@ -3,7 +3,6 @@
 import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
 import Image from 'next/image'
 import { useContext } from 'react'
-import { styled } from 'styled-components'
 
 import { OrdersContext } from '@/context/orderContext'
 
@@ -12,11 +11,14 @@ import { StyledCard, UseStyle } from './styles'
 
 export default function RecommendedOrderCard({ data }) {
   const classes = UseStyle()
+
   const { setOrderItem } = useContext(OrdersContext)
+
   const handleAddOrder = (id) => {
     const order = data.find((el) => el.id === id)
     setOrderItem((prev) => [...prev, order])
   }
+
   return (
     <Card className={classes.card}>
       <CardHeader

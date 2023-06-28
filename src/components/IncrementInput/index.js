@@ -1,6 +1,5 @@
-import { Box, Button, IconButton, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useContext, useState } from 'react'
-import { styled } from 'styled-components'
 
 import { OrdersContext } from '@/context/orderContext'
 
@@ -8,9 +7,11 @@ import { StyledButton, UseStyle } from './styles'
 
 export default function IncrementInput({ id }) {
   const [itemCount, setItemCount] = useState(1)
+
   const { setOrderItem, orderItem } = useContext(OrdersContext)
 
   const classes = UseStyle()
+
   const handleDecrementClick = () => {
     if (itemCount === 0) return
     else setItemCount(itemCount - 1)

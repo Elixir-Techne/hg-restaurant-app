@@ -10,36 +10,23 @@ import {
   Card,
   CardHeader,
   IconButton,
-  LinearProgress,
   Typography,
 } from '@mui/material'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useContext, useEffect, useState } from 'react'
-import { styled } from 'styled-components'
+import { useContext, useState } from 'react'
 
-import OrderList from '@/components/OrderLIst'
-import PaymentSummary from '@/components/PaymentSummary'
-import RecommendedOrderCard from '@/components/RecommendedOrderCard'
 import { OrdersContext } from '@/context/orderContext'
-// import { recommendData } from '@/context/orderContext'
 import { getOrderByID, getOrders } from '@/utils/api'
 
-import cakePng from '../../../../public/assets/icons/cake.png'
 import Loader from '../../../components/loader/loader'
-import {
-  StyledBadge,
-  StyledCard,
-  StyledRecommendedCard,
-  UseStyle,
-} from './styles'
+import { StyledBadge, StyledCard, UseStyle } from './styles'
 
 export default function Order() {
-  const { recommendData, totalBillingPrice, totalQuantity } =
-    useContext(OrdersContext)
+  const { totalBillingPrice, totalQuantity } = useContext(OrdersContext)
+
   const router = useRouter()
+
   const classes = UseStyle()
-  const [quantity, setQuantity] = useState('')
 
   //API for GET orders
 

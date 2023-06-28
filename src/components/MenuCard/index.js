@@ -1,12 +1,12 @@
-import { Box, Button, Card, Chip, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import Image from 'next/image'
-import { styled } from 'styled-components'
 
 import cakePng from '../../../public/assets/icons/cake.png'
 import { StyleChip, StyledCard, UseStyle } from './styles'
 
 export default function MenuCard({ onClick, data }) {
   const classes = UseStyle()
+
   return data?.map((item) => (
     <StyledCard key={item.id}>
       {item.trending && <StyleChip label="Trending #1" />}

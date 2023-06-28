@@ -14,12 +14,17 @@ import { getMenu, getMenuItem } from '@/utils/api'
 
 export default function Menu() {
   const searchParams = useSearchParams()
+
   const router = useRouter()
+
   const category = searchParams.get('category')
 
   const [isCustomizeable, setIsCustomizeable] = useState(false)
+
   const { setOrderItem, data } = useContext(OrdersContext)
+
   const [currentItem, setCurrentItem] = useState(null)
+
   //API for GET menu
 
   // useEffect(() => {
@@ -59,7 +64,14 @@ export default function Menu() {
           <ReorderCard />
         </>
       ) : (
-        <Box display="flex" flexWrap="wrap" gap="20px" mx={6} mb={4}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexWrap="wrap"
+          gap="20px"
+          my={4}
+          width="100%"
+        >
           <MenuCard onClick={handleAddItemClick} data={data} />
         </Box>
       )}

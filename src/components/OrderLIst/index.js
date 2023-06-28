@@ -7,12 +7,13 @@ import IncrementInput from '../IncrementInput'
 import { UseStyle } from './styles'
 
 export default function OrderList() {
-  const { setOrderItem, orderItem } = useContext(OrdersContext)
+  const { orderItem } = useContext(OrdersContext)
+
   const classes = UseStyle()
 
   return (
     <>
-      <Box mx={4} my={4}>
+      <Box mx={4} my={4} p={2}>
         <Typography className={classes.orderCard}>ORDER CART</Typography>
         {orderItem.map((item) => {
           return (

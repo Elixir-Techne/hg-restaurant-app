@@ -1,28 +1,32 @@
 import CloseIcon from '@mui/icons-material/Close'
 import SearchIcon from '@mui/icons-material/Search'
-import { Box, IconButton, TextField } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
 import Image from 'next/image'
 import { useState } from 'react'
-import { styled } from 'styled-components'
 
 import MobileMenuSvg from '../../../public/assets/icons/feather-menu.svg'
-import SearchSvg from '../../../public/assets/icons/search.svg'
 import Sidebar from '../Sidebar'
 import { StyledTextField, UseStyle } from './styles'
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
+
   const [searchToggle, setSearchToggle] = useState(false)
+
   const classes = UseStyle()
+
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen)
   }
+
   const handleSearch = () => {
     setSearchToggle(true)
   }
+
   const handleCancel = () => {
     setSearchToggle(false)
   }
+
   return (
     <Box my={4} className={classes.mainContainer}>
       <IconButton onClick={handleDrawerToggle}>
@@ -46,7 +50,6 @@ export default function Header() {
       ) : null}
       {!searchToggle ? (
         <IconButton onClick={handleSearch}>
-          {/* <Image src={<SearchIcon />} alt="" /> */}
           <SearchIcon fontSize="large" className={classes.icon} />
         </IconButton>
       ) : null}

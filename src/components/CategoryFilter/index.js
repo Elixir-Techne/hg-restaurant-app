@@ -1,10 +1,8 @@
 import { Box, Card, Typography } from '@mui/material'
 import Tab from '@mui/material/Tab'
-import Tabs from '@mui/material/Tabs'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { getCategories } from '@/utils/api'
 
@@ -12,9 +10,11 @@ import breakFastPng from '../../../public/assets/icons/breakfast.png'
 import menu from '../../utils/MenuItem.json'
 import { TabGroup, UseStyle } from './styles'
 
-export default function CategoryFilter({ tabs, onTabSelect, value }) {
+export default function CategoryFilter({ value }) {
   const [activeTab, setActiveTab] = useState(1)
+
   const router = useRouter()
+
   const classes = UseStyle()
 
   // API for GET Menu
@@ -36,7 +36,6 @@ export default function CategoryFilter({ tabs, onTabSelect, value }) {
     const activeItem = menu.menuItems.find((item) => item.id === newValue)
     setActiveTab(newValue)
     router.push(`/menu?category=${activeItem.path}`)
-    // onTabSelect(newValue)
   }
   return (
     <Card className={classes.mainContainer}>

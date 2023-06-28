@@ -15,8 +15,11 @@ export default function CustomizeDrawer({
   currentItem,
 }) {
   const { trendingData } = useContext(OrdersContext)
+
   const [selectedValue, setSelectedValue] = useState(trendingData[0])
+
   const classes = UseStyle()
+
   const handleChange = (event) => {
     const addExtra = trendingData?.find((el) => el.id == event.target.value)
     setSelectedValue(addExtra)

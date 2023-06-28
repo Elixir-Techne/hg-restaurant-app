@@ -1,5 +1,7 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useState } from 'react'
 import React from 'react'
+
+export const OrdersContext = createContext(null)
 
 export const recommendData = [
   {
@@ -70,12 +72,14 @@ const trendingData = [
   { id: 10, name: ' Caesar Salad [Chicken]', price: '25.81', quantity: 1 },
   { id: 11, name: ' Caesar Salad [Beef]', price: ' 25.00', quantity: 1 },
 ]
-export const OrdersContext = createContext(null)
 
 export const OrdersProvider = ({ children }) => {
   const [totalBillingPrice, setTotalBillingPrice] = useState(' ')
+
   const [totalQuantity, setTotalQuantity] = useState(' ')
+
   const [orderItem, setOrderItem] = useState([])
+
   return (
     <OrdersContext.Provider
       value={{
