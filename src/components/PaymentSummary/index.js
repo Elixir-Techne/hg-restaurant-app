@@ -1,5 +1,5 @@
 import { Box, Card, Divider, Typography } from '@mui/material'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { OrdersContext } from '../../context/orderContext'
 import { UseStyle } from './styles'
@@ -9,7 +9,6 @@ export default function PaymentSummary() {
     setTotalBillingPrice,
     totalBillingPrice,
     setTotalQuantity,
-    setOrderItem,
     orderItem,
   } = useContext(OrdersContext)
 
@@ -24,24 +23,27 @@ export default function PaymentSummary() {
         ),
       0,
     )
+
     const quantity = orderItem.reduce(
       (sum, object) => sum + parseFloat(object.quantity),
       0,
     )
+
     setTotalQuantity(quantity)
+
     setTotalBillingPrice(totalPrice.toFixed(2))
   }, [orderItem])
 
   return (
     <Card className={classes.maincontainer}>
-      <Box className={classes.subContainer}>
+      <Box className={classes.subContainer} px={5} pb={2}>
         <Typography className={classes.paymentTypography}>
           PAYMENT SUMMARY
         </Typography>
         <Typography className={classes.viewTypography}>View Details</Typography>
       </Box>
       <Divider variant="middle" />
-      <Box className={classes.subContainer} my={2}>
+      <Box className={classes.subContainer} my={2} px={5} pt={2}>
         <Typography className={classes.totalTypography}>
           TOTAL PAYMENT
         </Typography>

@@ -4,8 +4,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { Box, Button, Card, CardHeader, Typography } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { useContext, useEffect, useState } from 'react'
-import { styled } from 'styled-components'
+import { useContext } from 'react'
 
 import OrderList from '@/components/OrderLIst'
 import PaymentSummary from '@/components/PaymentSummary'
@@ -15,13 +14,13 @@ import { getOrderByID, getOrders } from '@/utils/api'
 
 import { StyledCard, UseStyle } from './styles'
 
-// import { recommendData } from '../../../context/orderContext'
-
 export default function Order() {
   const classes = UseStyle()
+
   const { recommendData } = useContext(OrdersContext)
 
   const router = useRouter()
+
   const handleConfirmOrder = () => {
     router.push('/checkout')
   }

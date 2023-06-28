@@ -23,6 +23,7 @@ export const UseStyle = makeStyles(() => ({
 }))
 
 export const StyledCard = styled(Card)({
+  marginTop: '0.5rem',
   background: 'transparent',
   borderTop: '1px solid #70707050',
   boxShadow: 'none',

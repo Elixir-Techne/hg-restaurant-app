@@ -1,24 +1,14 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputBase,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
-import Image from 'next/image'
 import * as React from 'react'
-import { styled } from 'styled-components'
-
-import { theme } from '@/theme'
 
 import DoorInSvg from '../../app/assets/icons/DoorInSvg'
 import { StyledInput, UseStyle } from './styles'
 
 const CountryCodeSelect = ({ code, handleChange }) => {
   const classes = UseStyle()
+
   return (
     <Select
       labelId="demo-customized-select-label"
@@ -37,10 +27,13 @@ const CountryCodeSelect = ({ code, handleChange }) => {
 
 export default function LoginInput({ onClick }) {
   const [code, setCode] = React.useState('')
+
   const classes = UseStyle()
+
   const handleCountryCodechange = (event) => {
     setCode(event.target.value)
   }
+
   return (
     <Box className={classes.mainContainer}>
       <Box display="flex">

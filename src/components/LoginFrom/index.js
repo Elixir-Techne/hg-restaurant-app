@@ -12,7 +12,6 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { styled } from 'styled-components'
 
 import LoginInput from '@/components/LoginInput'
 import SocialLogin from '@/components/SocialLogin'
@@ -23,8 +22,11 @@ import { StyledCard, UseStyle } from './styles'
 
 export default function LoginForm() {
   const isMobile = useMediaQuery('(max-width:768px)')
+
   const router = useRouter()
+
   const classes = UseStyle()
+
   const handleLoginClick = () => {
     router.push('/menu?category=for-you')
   }

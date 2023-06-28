@@ -1,17 +1,10 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Typography,
-} from '@mui/material'
-import { styled } from 'styled-components'
+import { Button, CardContent, CardHeader, Typography } from '@mui/material'
 
 import { StyledCard, UseStyle } from './styles'
 
 export default function ReorderCard() {
   const classes = UseStyle()
+
   return (
     <StyledCard>
       <CardHeader

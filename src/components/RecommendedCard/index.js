@@ -1,7 +1,6 @@
-import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { Box, CardContent, CardHeader, Typography } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { useContext, useState } from 'react'
-import { styled } from 'styled-components'
 
 import { OrdersContext } from '@/context/orderContext'
 
@@ -11,10 +10,15 @@ import { StyledCard, UseStyle } from './styles'
 
 export default function RecommendedCard() {
   const router = useRouter()
+
   const [isCustomizeable, setIsCustomizeable] = useState(false)
+
   const [currentItem, setCurrentItem] = useState(null)
+
   const classes = UseStyle()
+
   const { data, setOrderItem } = useContext(OrdersContext)
+
   const handleAddItemClick = (item) => {
     if (item.customize) {
       setCurrentItem(item)
@@ -30,6 +34,7 @@ export default function RecommendedCard() {
     setIsCustomizeable(false)
     router.push('/order')
   }
+
   return (
     <StyledCard>
       <CardHeader

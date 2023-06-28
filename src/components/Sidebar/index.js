@@ -15,8 +15,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import * as React from 'react'
-import { useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { getCategories } from '@/utils/api'
 
@@ -25,8 +24,10 @@ import menu from '../../utils/MenuItem.json'
 import { UseStyle } from './styles'
 
 export default function Sidebar({ open, onClose }) {
-  const [openSubmenu, setOpenSubmenu] = React.useState('')
+  const [openSubmenu, setOpenSubmenu] = useState('')
+
   const router = useRouter()
+
   const classes = UseStyle()
 
   //API for GET Menu

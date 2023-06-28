@@ -4,6 +4,10 @@ export const UseStyle = makeStyles(() => ({
   maincontainer: {
     display: 'flex',
     flexDirection: 'column',
+    backgroundColor: '#F3F3F5',
+    backgroundImage: `url(assets/icons/bgImage.png)`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
   },
   subContainer: {
     height: '50px',
