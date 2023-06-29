@@ -77,10 +77,10 @@ export default function Menu() {
       ) : (
         <Box
           display="flex"
-          justifyContent="center"
           flexWrap="wrap"
           gap="20px"
           my={4}
+          mx={5}
           width="100%"
         >
           <MenuCard onClick={handleAddItemClick} data={data} />
