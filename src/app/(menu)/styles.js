@@ -27,5 +27,6 @@ export const UseStyle = makeStyles(() => ({
     backgroundImage: `url(images/bg-image.png)`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    overflowX: 'hidden',
   },
 }))
