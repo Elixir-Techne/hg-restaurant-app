@@ -18,6 +18,7 @@ export default function MenuLayout({ children }) {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
       }}
+      height="100%"
     >
       <Box className={classes.subContainer}>
         <Typography className={classes.typography}>TABLE 3</Typography>
