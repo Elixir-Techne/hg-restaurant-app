@@ -2,6 +2,7 @@ import { makeStyles } from '@mui/styles'
 
 export const UseStyle = makeStyles(() => ({
   maincontainer: {
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#F3F3F5',
