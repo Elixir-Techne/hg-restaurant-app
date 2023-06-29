@@ -12,8 +12,6 @@ import ReorderCard from '@/components/ReorderCard'
 import { OrdersContext } from '@/context/orderContext'
 import { getMenu, getMenuItem } from '@/utils/api'
 
-import { useStyle } from './styles'
-
 export default function Menu() {
   const searchParams = useSearchParams()
 
@@ -26,14 +24,6 @@ export default function Menu() {
   const { data, handleAddOrderItem } = useContext(OrdersContext)
 
   const [currentItem, setCurrentItem] = useState(null)
-
-  const classes = useStyle()
-
-  useEffect(() => {
-    if (data.length % 2 === 0) {
-      data.length - 1
-    }
-  })
 
   //API for GET menu
 
