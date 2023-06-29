@@ -2,7 +2,7 @@
 
 import { Box } from '@mui/material'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import CategoryFilter from '@/components/CategoryFilter'
 import CustomizeDrawer from '@/components/CustomizeDrawer'
@@ -11,6 +11,8 @@ import RecommendedCard from '@/components/RecommendedCard'
 import ReorderCard from '@/components/ReorderCard'
 import { OrdersContext } from '@/context/orderContext'
 import { getMenu, getMenuItem } from '@/utils/api'
+
+import { useStyle } from './styles'
 
 export default function Menu() {
   const searchParams = useSearchParams()
@@ -21,9 +23,17 @@ export default function Menu() {
 
   const [isCustomizeable, setIsCustomizeable] = useState(false)
 
-  const { setOrderItem, data } = useContext(OrdersContext)
+  const { data, handleAddOrderItem } = useContext(OrdersContext)
 
   const [currentItem, setCurrentItem] = useState(null)
+
+  const classes = useStyle()
+
+  useEffect(() => {
+    if (data.length % 2 === 0) {
+      data.length - 1
+    }
+  })
 
   //API for GET menu
 
@@ -44,13 +54,14 @@ export default function Menu() {
       setCurrentItem(item)
       setIsCustomizeable(true)
     } else {
-      setOrderItem((prev) => [...prev, item])
+      handleAddOrderItem(item)
       router.push('/order')
     }
   }
 
   const handleCustomizeAddItemClick = (e, item) => {
-    setOrderItem((prev) => [...prev, item, currentItem])
+    handleAddOrderItem(currentItem)
+    handleAddOrderItem(item)
     setIsCustomizeable(false)
     router.push('/order')
   }

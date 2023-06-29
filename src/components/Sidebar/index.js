@@ -39,6 +39,7 @@ export default function Sidebar({ open, onClose }) {
   // }, [])
 
   const handleClick = (item) => {
+    onClose()
     if (item.hasSubMenu && item.id === openSubmenu) setOpenSubmenu('')
     else {
       if (item.hasSubMenu) setOpenSubmenu(item.id)

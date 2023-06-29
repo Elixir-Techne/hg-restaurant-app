@@ -17,20 +17,21 @@ export default function RecommendedCard() {
 
   const classes = UseStyle()
 
-  const { data, setOrderItem } = useContext(OrdersContext)
+  const { data, setOrderItem, handleAddOrderItem } = useContext(OrdersContext)
 
   const handleAddItemClick = (item) => {
     if (item.customize) {
       setCurrentItem(item)
       setIsCustomizeable(true)
     } else {
-      setOrderItem((prev) => [...prev, item])
+      handleAddOrderItem(item)
       router.push('/order')
     }
   }
 
   const handleCustomizeAddItemClick = (e, item) => {
-    setOrderItem((prev) => [...prev, item, currentItem])
+    handleAddOrderItem(currentItem)
+    handleAddOrderItem(item)
     setIsCustomizeable(false)
     router.push('/order')
   }

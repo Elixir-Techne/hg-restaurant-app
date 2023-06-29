@@ -12,12 +12,8 @@ import { StyledCard, UseStyle } from './styles'
 export default function RecommendedOrderCard({ data }) {
   const classes = UseStyle()
 
-  const { setOrderItem } = useContext(OrdersContext)
-
-  const handleAddOrder = (id) => {
-    const order = data.find((el) => el.id === id)
-    setOrderItem((prev) => [...prev, order])
-  }
+  const { orderItem, setOrderItem, handleAddOrderItem } =
+    useContext(OrdersContext)
 
   return (
     <Card className={classes.card}>
@@ -45,7 +41,7 @@ export default function RecommendedOrderCard({ data }) {
               <Button
                 variant="contained"
                 className={classes.button}
-                onClick={() => handleAddOrder(item.id)}
+                onClick={() => handleAddOrderItem(item)}
               >
                 <Typography className={classes.buttonTypography}>
                   Add +
