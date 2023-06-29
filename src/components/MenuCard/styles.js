@@ -25,6 +25,10 @@ export const UseStyle = makeStyles(() => ({
     width: '140px',
     marginTop: theme.spacing(2),
   },
+  lastItem: {
+    border: '1px solid red',
+    justifySelf: 'center',
+  },
 }))
 
 export const StyledCard = styled(Card)({
