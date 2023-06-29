@@ -82,7 +82,6 @@ export default function Menu() {
           my={4}
           mx={5}
           width="100%"
-          className="menu"
         >
           <MenuCard onClick={handleAddItemClick} data={data} />
         </Box>
