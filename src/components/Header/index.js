@@ -2,15 +2,19 @@ import CloseIcon from '@mui/icons-material/Close'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, IconButton } from '@mui/material'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+
+import { OrdersContext } from '@/context/orderContext'
 
 import MobileMenuSvg from '../../../public/assets/icons/feather-menu.svg'
 import Sidebar from '../Sidebar'
 import { StyledTextField, UseStyle } from './styles'
 
 export default function Header() {
-  const [drawerOpen, setDrawerOpen] = useState(false)
+  const { setSearch } = useContext(OrdersContext)
 
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [searchLocal, setSearchLocal] = useState('')
   const [searchToggle, setSearchToggle] = useState(false)
 
   const classes = UseStyle()
@@ -25,6 +29,18 @@ export default function Header() {
 
   const handleCancel = () => {
     setSearchToggle(false)
+    setSearch('')
+    setSearchLocal('')
+  }
+
+  const handleSearchChange = (e) => {
+    setSearchLocal(e?.target?.value)
+  }
+
+  const handleKeyDown = (e) => {
+    if (e?.keyCode === 13) {
+      setSearch(searchLocal)
+    }
   }
 
   return (
@@ -36,10 +52,14 @@ export default function Header() {
       {searchToggle ? (
         <Box className={classes.subContainer}>
           <StyledTextField
+            autoFocus
             id="outlined-basic"
             placeholder="Search"
             variant="outlined"
             fullWidth
+            value={searchLocal}
+            onKeyDown={handleKeyDown}
+            onChange={handleSearchChange}
           />
           <CloseIcon
             fontSize="large"

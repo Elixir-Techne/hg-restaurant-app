@@ -35,7 +35,7 @@ const data = [
   },
   {
     id: 5,
-    name: 'Egg Hollandaise',
+    name: 'Chocolate Shake',
     price: '22.64',
     trending: true,
     customize: true,
@@ -74,6 +74,8 @@ const trendingData = [
 ]
 
 export const OrdersProvider = ({ children }) => {
+  const [search, setSearch] = useState('')
+
   const [totalBillingPrice, setTotalBillingPrice] = useState(' ')
 
   const [totalQuantity, setTotalQuantity] = useState(' ')
@@ -92,6 +94,8 @@ export const OrdersProvider = ({ children }) => {
         recommendData,
         trendingData,
         data,
+        search,
+        setSearch,
       }}
     >
       {children}
