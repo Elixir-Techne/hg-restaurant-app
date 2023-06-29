@@ -80,6 +80,16 @@ export const OrdersProvider = ({ children }) => {
 
   const [orderItem, setOrderItem] = useState([])
 
+  const handleAddOrderItem = (item) => {
+    const isExistOrder = orderItem.find((el) => el.id === item.id)
+    setOrderItem((prev) =>
+      isExistOrder
+        ? prev?.map((p) =>
+            p.id === item.id ? { ...p, quantity: p.quantity + 1 } : p,
+          )
+        : [...prev, item],
+    )
+  }
   return (
     <OrdersContext.Provider
       value={{
@@ -92,6 +102,7 @@ export const OrdersProvider = ({ children }) => {
         recommendData,
         trendingData,
         data,
+        handleAddOrderItem,
       }}
     >
       {children}

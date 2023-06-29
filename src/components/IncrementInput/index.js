@@ -1,20 +1,17 @@
 import { Box, Typography } from '@mui/material'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { OrdersContext } from '@/context/orderContext'
 
 import { StyledButton, UseStyle } from './styles'
 
-export default function IncrementInput({ id }) {
-  const [itemCount, setItemCount] = useState(1)
-
+export default function IncrementInput({ id, quantity }) {
   const { setOrderItem, orderItem } = useContext(OrdersContext)
 
   const classes = UseStyle()
-
+  useEffect(() => {})
   const handleDecrementClick = () => {
-    if (itemCount === 0) return
-    else setItemCount(itemCount - 1)
+    if (quantity === 0) return
     setOrderItem((prev) =>
       prev.map((item) =>
         item.id === id
@@ -28,7 +25,6 @@ export default function IncrementInput({ id }) {
   }
 
   const handleIncrementClick = () => {
-    setItemCount(itemCount + 1)
     setOrderItem((prev) =>
       prev.map((item) =>
         item.id === id
@@ -47,11 +43,11 @@ export default function IncrementInput({ id }) {
         variant="contained"
         className={classes.styledButton}
         onClick={handleDecrementClick}
-        disabled={itemCount === 0}
+        disabled={quantity === 0}
       >
         -
       </StyledButton>
-      <Typography className={classes.typography}>{itemCount}</Typography>
+      <Typography className={classes.typography}>{quantity}</Typography>
       <StyledButton
         variant="contained"
         onClick={handleIncrementClick}

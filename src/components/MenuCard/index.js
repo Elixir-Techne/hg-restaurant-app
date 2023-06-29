@@ -7,7 +7,7 @@ import { StyleChip, StyledCard, UseStyle } from './styles'
 export default function MenuCard({ onClick, data }) {
   const classes = UseStyle()
 
-  return data?.map((item) => (
+  return data?.map((item, index) => (
     <StyledCard key={item.id}>
       {item.trending && <StyleChip label="Trending #1" />}
       <Image src={cakePng} alt="" className={classes.image} />
